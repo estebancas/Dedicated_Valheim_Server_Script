@@ -126,7 +126,7 @@ BRANCH=$(git rev-parse --abbrev-ref HEAD)
 UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name @{upstream})
 
 function script_check_update() {
-#Its not freaking pretty like Lokis butt but it works!!!!
+
     git fetch
       [ -n "$(git diff --name-only "$UPSTREAM" "$SCRIPTFILE")" ] && {
         git pull --force
@@ -141,7 +141,6 @@ function script_check_update() {
     }
 
 }
-
 
 ########################################################################
 ########################Install Valheim Server##########################
