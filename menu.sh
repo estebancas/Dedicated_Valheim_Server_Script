@@ -126,13 +126,13 @@ BRANCH=$(git rev-parse --abbrev-ref HEAD)
 UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name @{upstream})
 
 function script_check_update() {
-
+#Its not freaking pretty like Lokis butt but it works!!!!
     git fetch
       [ -n "$(git diff --name-only "$UPSTREAM" "$SCRIPTFILE")" ] && {
         git pull --force
 	git stash
-#        git checkout "$BRANCH"
-       git pull --force
+        git checkout "$BRANCH"
+        git pull --force
       	sleep 1
         cd /opt/Dedicated_Valheim_server_Script/
 	chmod +x menu.sh
