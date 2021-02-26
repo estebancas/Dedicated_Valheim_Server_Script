@@ -135,8 +135,9 @@ function script_check_update() {
 	git stash
         git checkout "$BRANCH"
         git pull --force
-	echo -ne "
-        $(ColorOrange 'Odin give this updated menu Execute Permissions and Reload!')"
+	echo " Updating"
+	#echo -ne "
+        #$(ColorOrange 'Odin give this updated menu Execute Permissions and Reload!')"
       	sleep 1
         cd /opt/Dedicated_Valheim_server_Script/
 	chmod +x menu.sh
