@@ -128,7 +128,7 @@ UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name @{upstream})
 function script_check_update() {
 
     git fetch
-   if  [ -n "$(git diff --name-only "$UPSTREAM" "$SCRIPTFILE")" ]; then
+      [ -n "$(git diff --name-only "$UPSTREAM" "$SCRIPTFILE")" ] && {
       echo "BY THORS HAMMER! THERE IS A NEW UPDATE! Updating from Valhalla!!"
       sleep 1
         git pull --force
@@ -145,7 +145,7 @@ function script_check_update() {
 
         # Now exit this old instance
         exit 1
-    else
+    }
         echo "Oh for Loki sakes! No updates to be had... back to choring! "
     fi
 }
