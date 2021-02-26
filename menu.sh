@@ -124,11 +124,12 @@ SCRIPTNAME="menu.sh"
 ARGS=( "$@" )                                  # fixed to make array of args (see below)
 BRANCH="beta"
 
+
 function script_check_update() {
-    cd "$SCRIPTPATH"
+BRANCH="beta"
     git fetch
     [ -n "$(git diff --name-only "origin/$BRANCH" "$SCRIPTFILE")" ] && {
-        echo "Found a new version of me, updating myself..."
+   echo "Found a new version of me, updating myself..."
         git pull --force
         git checkout "$BRANCH"
         git pull --force
@@ -141,8 +142,6 @@ function script_check_update() {
     }
     echo "Already the latest version."
 }
-
-
 
 
 
