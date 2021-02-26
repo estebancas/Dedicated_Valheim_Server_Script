@@ -147,7 +147,6 @@ function script_check_update() {
         exit 1
     }
         echo "Oh for Loki sakes! No updates to be had... back to choring! "
-    fi
 }
 
 
