@@ -120,7 +120,7 @@ ColorWhite(){
 SCRIPT="$(readlink -f "$0")"
 SCRIPTFILE="$(basename "$SCRIPT")"             # get name of the file (not full path)
 SCRIPTPATH="$(dirname "$SCRIPT")"
-SCRIPTNAME="$0"
+SCRIPTNAME="menu.sh"
 ARGS=( "$@" )                                  # fixed to make array of args (see below)
 BRANCH="beta"
 
