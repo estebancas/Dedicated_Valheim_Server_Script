@@ -129,13 +129,12 @@ function script_check_update() {
 
     git fetch
       [ -n "$(git diff --name-only "$UPSTREAM" "$SCRIPTFILE")" ] && {
-      echo "BY THORS HAMMER! THERE IS A NEW UPDATE! Updating from Valhalla!!"
-      sleep 1
         git pull --force
 	git stash
         git checkout "$BRANCH"
         git pull --force
 	echo " Updating"
+	echo "BY THORS HAMMER! THERE IS A NEW UPDATE! Updating from Valhalla!!"
 	echo -ne "
         $(ColorOrange 'Odin give this updated menu Execute Permissions and Reload!')"
       	sleep 1
