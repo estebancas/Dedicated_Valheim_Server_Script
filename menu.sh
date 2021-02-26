@@ -563,10 +563,6 @@ $(ColorGreen   'Press y (for yes) or n (for no)') "
         echo "Unpacking ${worldpath}/${restorefile}"
         tar xzf ${worldpath}/${restorefile} --strip-components=7 --directory ${worldpath}/  
 	chown -Rf steam:steam ${worldpath}
-	#uncomment when test are 100%
-	#last time steam was applied to /usr and other locations 
-	#really jacked stuff up - DAMN IT LOKI!!!
-	#chown -Rf steam:steam $worldpath
  #start valheim server
         echo "Starting Valheim Services"
         echo "This better work Loki!"
@@ -649,7 +645,7 @@ function check_apply_server_updates_beta() {
         echo "No new Updates found"
         echo "Cleaning up TEMP FILES"
         rm -Rf /opt/valheimtemp
-        rm appmainrepo.log
+        rm appmanirepo.log
         rm appmanilocal.log
     sleep 2
     else
