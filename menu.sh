@@ -1,6 +1,6 @@
 #!/bin/bash
 # Sanity Check
-#    #######################123################################
+#    #######################1223233##############################
 echo "$(tput setaf 4)-------------------------------------------------------"
 echo "$(tput setaf 0)$(tput setab 7)Since we need to run the menu with elevated privileges$(tput sgr 0)"
 echo "$(tput setaf 0)$(tput setab 7)Please enter your password now.$(tput sgr 0)"
