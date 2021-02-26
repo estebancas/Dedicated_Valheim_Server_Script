@@ -128,7 +128,7 @@ UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name @{upstream})
 function script_check_update() {
 
     git fetch
-   if  [ -n "$(git diff --name-only "$UPSTREAM" "$SCRIPTFILE")" ] then
+   if  [ -n "$(git diff --name-only "$UPSTREAM" "$SCRIPTFILE")" ]; then
       echo "BY THORS HAMMER! THERE IS A NEW UPDATE! Updating from Valhalla!!"
       sleep 1
         git pull --force
