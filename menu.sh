@@ -116,7 +116,7 @@ ColorWhite(){
 
 ########################################################################
 #####################Check for Menu Updates#############################
-######################################22##################################
+########################################################################
 MENUSCRIPT="$(readlink -f "$0")"
 SCRIPTFILE="$(basename "$MENUSCRIPT")"            
 SCRIPTPATH="$(dirname "$SCRIPT")"
@@ -137,8 +137,6 @@ function script_check_update() {
         cd /opt/Dedicated_Valheim_server_Script/
 	chmod +x menu.sh
         exec "$SCRIPTNAME" "${ARGS[@]}"
-
-        # Now exit this old instance
         exit 1
     }
 
