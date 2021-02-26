@@ -117,25 +117,55 @@ ColorWhite(){
 ########################################################################
 #####################Check for Menu Updates#############################
 ########################################################################
+SCRIPT="$(readlink -f "$0")"
+SCRIPTFILE="$(basename "$SCRIPT")"             # get name of the file (not full path)
+SCRIPTPATH="$(dirname "$SCRIPT")"
+SCRIPTNAME="$0"
+ARGS=( "$@" )                                  # fixed to make array of args (see below)
+BRANCH="beta"
 
 function script_check_update() {
-BRANCH="https://github.com/Nimdy/Dedicated_Valheim_Server_Script/tree/beta"
-    git stash
-    LAST_UPDATE=`git show --no-notes --format=format:"%H" $BRANCH | head -n 1`
-    LAST_COMMIT=`git show --no-notes --format=format:"%H" origin/$BRANCH | head -n 1`
-        if [ $LAST_COMMIT != $LAST_UPDATE ]; then
-   tput setaf 2; echo "Updating your branch $BRANCH" ; tput setaf 9; 
-            git pull --no-edit
-	  else
-            echo "No updates available"
+    cd "$SCRIPTPATH"
+    git fetch
+    [ -n "$(git diff --name-only "origin/$BRANCH" "$SCRIPTFILE")" ] && {
+        echo "Found a new version of me, updating myself..."
+        git pull --force
+        git checkout "$BRANCH"
+        git pull --force
+        echo "Running the new version..."
+        cd -                                   # return to original working dir
+        exec "$SCRIPTNAME" "${ARGS[@]}"
 
-        fi
-    echo "Resetting permissions on menu.sh"
-    chmod +x menu.sh
-    tput setaf 2; echo "Restarting menu system" ; tput setaf 9; 
-    sleep 3
-    ./menu.sh
+        # Now exit this old instance
+        exit 1
+    }
+    echo "Already the latest version."
 }
+
+
+
+
+
+
+
+#function script_check_update() {
+#BRANCH="https://github.com/Nimdy/Dedicated_Valheim_Server_Script/tree/beta"
+#    git stash
+#    LAST_UPDATE=`git show --no-notes --format=format:"%H" $BRANCH | head -n 1`
+#    LAST_COMMIT=`git show --no-notes --format=format:"%H" origin/$BRANCH | head -n 1`
+#        if [ $LAST_COMMIT != $LAST_UPDATE ]; then
+#   tput setaf 2; echo "Updating your branch $BRANCH" ; tput setaf 9; 
+#            git pull --no-edit
+#	  else
+#            echo "No updates available"
+#
+#        fi
+#    echo "Resetting permissions on menu.sh"
+#    chmod +x menu.sh
+#    tput setaf 2; echo "Restarting menu system" ; tput setaf 9; 
+#    sleep 3
+#    ./menu.sh
+#}
 
 
 
