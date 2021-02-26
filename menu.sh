@@ -129,15 +129,13 @@ function script_check_update() {
 
     git fetch
       [ -n "$(git diff --name-only "$UPSTREAM" "$SCRIPTFILE")" ] && {
-      echo "BY THORS HAMMER! THERE IS A NEW UPDATE! Updating from Valhalla!!"
+      echo "BY THORS HAMMER take a peek inside Valhalla!!"
       sleep 1
         git pull --force
 	git stash
         git checkout "$BRANCH"
         git pull --force
 	echo " Updating"
-	echo -ne "
-        $(ColorOrange 'Odin give this updated menu Execute Permissions and Reload!')"
       	sleep 1
         cd /opt/Dedicated_Valheim_server_Script/
 	chmod +x menu.sh
