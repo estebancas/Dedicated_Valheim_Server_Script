@@ -118,17 +118,17 @@ ColorWhite(){
 #####################Check for Menu Updates#############################
 ########################################################################
 SCRIPT="$(readlink -f "$0")"
-SCRIPTFILE="$(/ "$SCRIPT")"             
-SCRIPTPATH="$(Dedicated_Valheim_Server_Script "$SCRIPT")"
-SCRIPTNAME="menu.sh"
-ARGS=( "$@" )                                 
-BRANCH="beta"
-
+SCRIPTFILE="$(basename "$SCRIPT")"            
+SCRIPTPATH="$(dirname "$SCRIPT")"
+SCRIPTNAME="$0"
+ARGS=( "$@" )  
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name @{upstream})
 
 function script_check_update() {
-BRANCH="beta"
+
     git fetch
-    [ -n "$(git diff --name-only "origin/$BRANCH" "$SCRIPTFILE")" ] && {
+    [ -n "$(git diff --name-only "$UPSTREAM" "$SCRIPTFILE")" ] && {
    echo "Found a new version of me, updating myself..."
         git pull --force
         git checkout "$BRANCH"
