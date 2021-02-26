@@ -131,8 +131,8 @@ function script_check_update() {
       [ -n "$(git diff --name-only "$UPSTREAM" "$SCRIPTFILE")" ] && {
         git pull --force
 	git stash
-        git checkout "$BRANCH"
-        git pull --force
+#        git checkout "$BRANCH"
+#        git pull --force
       	sleep 1
         cd /opt/Dedicated_Valheim_server_Script/
 	chmod +x menu.sh
