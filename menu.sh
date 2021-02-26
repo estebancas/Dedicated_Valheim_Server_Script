@@ -131,6 +131,7 @@ function script_check_update() {
     [ -n "$(git diff --name-only "$UPSTREAM" "$SCRIPTFILE")" ] && {
    echo "Found a new version of me, updating myself..."
         git pull --force
+	git stash
         git checkout "$BRANCH"
         git pull --force
         echo "Running the new version..."
