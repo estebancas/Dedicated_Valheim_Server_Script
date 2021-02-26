@@ -135,7 +135,8 @@ function script_check_update() {
         git checkout "$BRANCH"
         git pull --force
         echo "Running the new version..."
-        cd -                                  
+        cd /opt/Dedicated_Valheim_server_Script/
+	chmod +x menu.sh
         exec "$SCRIPTNAME" "${ARGS[@]}"
 
         # Now exit this old instance
