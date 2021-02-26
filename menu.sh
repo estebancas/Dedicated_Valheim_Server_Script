@@ -118,10 +118,10 @@ ColorWhite(){
 #####################Check for Menu Updates#############################
 ########################################################################
 SCRIPT="$(readlink -f "$0")"
-SCRIPTFILE="$(basename "$SCRIPT")"             # get name of the file (not full path)
-SCRIPTPATH="$(dirname "$SCRIPT")"
+SCRIPTFILE="$(/ "$SCRIPT")"             
+SCRIPTPATH="$(Dedicated_Valheim_Server_Script "$SCRIPT")"
 SCRIPTNAME="menu.sh"
-ARGS=( "$@" )                                  # fixed to make array of args (see below)
+ARGS=( "$@" )                                 
 BRANCH="beta"
 
 
@@ -134,7 +134,7 @@ BRANCH="beta"
         git checkout "$BRANCH"
         git pull --force
         echo "Running the new version..."
-        cd -                                   # return to original working dir
+        cd -                                  
         exec "$SCRIPTNAME" "${ARGS[@]}"
 
         # Now exit this old instance
