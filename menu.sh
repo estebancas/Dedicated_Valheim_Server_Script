@@ -133,10 +133,6 @@ function script_check_update() {
 	git stash
         git checkout "$BRANCH"
         git pull --force
-	echo " Updating"
-	echo "BY THORS HAMMER! THERE IS A NEW UPDATE! Updating from Valhalla!!"
-	echo -ne "
-        $(ColorOrange 'Odin give this updated menu Execute Permissions and Reload!')"
       	sleep 1
         cd /opt/Dedicated_Valheim_server_Script/
 	chmod +x menu.sh
@@ -145,7 +141,7 @@ function script_check_update() {
         # Now exit this old instance
         exit 1
     }
-        echo "Oh for Loki sakes! No updates to be had... back to choring! "
+
 }
 
 
