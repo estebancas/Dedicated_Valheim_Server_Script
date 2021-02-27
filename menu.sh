@@ -29,7 +29,7 @@ backupPath=/home/steam/backups
 ###############################################################
 
 # Set Menu Version
-mversion="Version 1.7.7-Loki"
+mversion="Version 1.7.8-Loki"
 ##
 # Update Menu script 
 ##
