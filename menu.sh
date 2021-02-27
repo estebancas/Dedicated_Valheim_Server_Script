@@ -1,6 +1,6 @@
 #!/bin/bash
 # Sanity Check
-#    #####################################################
+#    #######################################################
 echo "$(tput setaf 4)-------------------------------------------------------"
 echo "$(tput setaf 0)$(tput setab 7)Since we need to run the menu with elevated privileges$(tput sgr 0)"
 echo "$(tput setaf 0)$(tput setab 7)Please enter your password now.$(tput sgr 0)"
@@ -8,7 +8,7 @@ echo "$(tput setaf 4)-------------------------------------------------------"
 #    ###################################################### 
 [[ "$EUID" -eq 0 ]] || exec sudo "$0" "$@"
 
-# BETA BRANCH MENU
+# MAIN BRANCH MENU
 #  THIS IS STILL A WORK IN PROGRESS BUT ALL THE FUNCTIONS WORK
 #  I NEED TO JUST CLEAN IT UP AND FORMAT BETTER
 #  PLEASE LET ME KNOW ABOUT ISSUES
@@ -146,6 +146,28 @@ function script_check_update() {
     }
         echo "Oh for Loki sakes! No updates to be had... back to choring! "
 }
+
+#####Fully remove after one week of testing new menu system with public
+#function script_check_update() {
+#BRANCH="https://github.com/Nimdy/Dedicated_Valheim_Server_Script/tree/main"
+#    git stash
+#    LAST_UPDATE=`git show --no-notes --format=format:"%H" $BRANCH | head -n 1`
+#    LAST_COMMIT=`git show --no-notes --format=format:"%H" origin/$BRANCH | head -n 1`
+#        if [ $LAST_COMMIT != $LAST_UPDATE ]; then
+#   tput setaf 2; echo "Updating your branch $BRANCH" ; tput setaf 9; 
+#            git pull --no-edit
+#	  else
+#            echo "No updates available"
+#
+#        fi
+#    echo "Resetting permissions on menu.sh"
+#    chmod +x menu.sh
+#    tput setaf 2; echo "Restarting menu system" ; tput setaf 9; 
+#    sleep 3
+#    ./menu.sh
+#}
+
+
 
 ########################################################################
 ########################Install Valheim Server##########################
@@ -405,7 +427,7 @@ sleep 1
 #build systemctl configurations for execution of processes for Valheim Server
 tput setaf 1; echo "Deleting old configuration if file exist" ; tput setaf 9; 
 tput setaf 1; echo "Building systemctl instructions for Valheim" ; tput setaf 9; 
-# remove old Valheim Server Service from first build script and correct pathing for lib verse etc
+# remove old Valheim Server Service
 [ -e /etc/systemd/system/valheimserver.service ] && rm /etc/systemd/system/valheimserver.service
 # remove past Valheim Server Service
 [ -e /lib/systemd/system/valheimserver.service ] && rm /lib/systemd/system/valheimserver.service
@@ -496,6 +518,10 @@ function backup_world_data() {
 	 echo "Cleaned up better than Loki"
          sleep 1
          ## Tar Section. Create a backup file, with the current date in its name.
+         ## Add -h to convert the symbolic links into a regular files.
+         ## Backup some system files, also the entire `/home` directory, etc.
+         ##--exclude some directories, for example the the browser's cache, `.bash_history`, etc.
+	  #stop valheim server
          echo "Stopping Valheim Server for clean backups"
          systemctl stop valheimserver.service
          echo "Stopped"
@@ -567,6 +593,10 @@ $(ColorGreen   'Press y (for yes) or n (for no)') "
         echo "Unpacking ${worldpath}/${restorefile}"
         tar xzf ${worldpath}/${restorefile} --strip-components=7 --directory ${worldpath}/  
 	chown -Rf steam:steam ${worldpath}
+	#uncomment when test are 100%
+	#last time steam was applied to /usr and other locations 
+	#really jacked stuff up - DAMN IT LOKI!!!
+	#chown -Rf steam:steam $worldpath
  #start valheim server
         echo "Starting Valheim Services"
         echo "This better work Loki!"
@@ -610,13 +640,12 @@ fi
 ########################################################################
 ######################beta updater for Valheim##########################
 ########################################################################
+########################################################################
+######################beta updater for Valheim##########################
+########################################################################
 #function check_apply_server_updates_beta() {
 #    echo ""
 #    echo "Downloading Official Valheim Repo Log Data for comparison only"
-#    Add file find and delete so appcache is cleared and then do check, cant test until next update 
-#     /home/steam/.steam/appcache/appinfo.vdf
-#     /root/.steam/appcache/appinfo.vdf
-#
 #      repoValheim=$(/home/steam/steamcmd +login anonymous +app_info_update 1 +app_info_print 896660 +quit | grep -A10 branches | grep -A2 public | grep buildid | cut -d'"' -f4)
 #      echo "Official Valheim-: $repoValheim"
 #      localValheim=$(grep buildid ${valheimInstallPath}/steamapps/appmanifest_896660.acf | cut -d'"' -f4)
@@ -632,8 +661,6 @@ fi
 #     fi
 #     echo ""
 #}
-
-
 function check_apply_server_updates_beta() {
     echo ""
     echo "Downloading Official Valheim Repo Log Data for comparison only"
@@ -671,12 +698,10 @@ while true; do
 echo -ne "
 $(ColorRed '------------------------------------------------------------')"
 echo ""
-tput setaf 2; echo "The Script will download the Log Data from" ; tput setaf 9;
-tput setaf 2; echo "the official Steam Valheim Repo and compare" ; tput setaf 9;
-tput setaf 2; echo "the data. No changes will be made, until" ; tput setaf 9;
-tput setaf 2; echo "you agree later." ; tput setaf 9;
+tput setaf 2; echo "The Script will download the Log Data from the official" ; tput setaf 9;
+tput setaf 2; echo "Steam Valheim Repo and compare the data." ; tput setaf 9;
+tput setaf 2; echo "No changes will be made, until you agree later." ; tput setaf 9;
 tput setaf 2; echo "Press y(YES) and n(NO)" ; tput setaf 9;
-echo ""
 echo -ne "
 $(ColorRed '------------------------------------------------------------')"
 echo ""
@@ -730,7 +755,6 @@ $(ColorRed '------------------------------------------------------------')"
 echo ""
 tput setaf 2; echo "You are about to STOP the Valheim Server" ; tput setaf 9; 
 tput setaf 2; echo "You are you sure y(YES) or n(NO)?" ; tput setaf 9; 
-echo ""
 echo -ne "
 $(ColorRed '------------------------------------------------------------')"
 echo ""
@@ -762,7 +786,6 @@ $(ColorRed '------------------------------------------------------------')"
 echo ""
 tput setaf 2; echo "You are about to START the Valheim Server" ; tput setaf 9;
 tput setaf 2; echo "You are you sure y(YES) or n(NO)?" ; tput setaf 9;
-echo ""
 echo -ne "
 $(ColorRed '------------------------------------------------------------')"
 echo ""
@@ -793,7 +816,6 @@ $(ColorRed '------------------------------------------------------------')"
 echo ""
 tput setaf 2; echo "You are about to RESTART the Valheim Server" ; tput setaf 9; 
 tput setaf 2; echo "You are you sure y(YES) or n(NO)?" ; tput setaf 9; 
-echo ""
 echo -ne "
 $(ColorRed '------------------------------------------------------------')"
 echo ""
@@ -845,7 +867,6 @@ echo -ne "
 
 $(ColorOrange '----------------Server System Information-------------------')
 $(ColorOrange '-')$(ColorGreen '1)') Fresh or Reinstall Valheim Server
-$(ColorOrange '------------------------------------------------------------')
 $(ColorOrange '-')$(ColorGreen '0)') Go to Main Menu
 $(ColorOrange '------------------------------------------------------------')
 $(ColorBlue 'Choose an option:') "
@@ -911,34 +932,6 @@ clear
     echo ""
 
 }
-
-########################################################################
-###############Change Valheim Server Access Password####################
-########################################################################
-
-function change_world_password() {
-clear
-    echo ""
-    echo "Add changing of password here... SED"
-    echo ""
-
-}
-
-########################################################################
-#################Change Public Server Displa Name#######################
-########################################################################
-
-function change_world_display_name() {
-clear
-    echo ""
-    echo "Add changing of public server name here...SED"
-    echo ""
-
-}
-
-
-
-
 
 ########################################################################
 #####################Sub Tech Support Menu System#######################
@@ -1150,6 +1143,7 @@ $(ColorBlue 'Choose an option:') "
 
 
 
+
 ########################################################################
 #######################Display Main Menu System#########################
 ########################################################################
@@ -1166,7 +1160,7 @@ $(ColorOrange '║ open to improvements')
 $(ColorOrange '║ Beware Loki hides within this script')
 $(ColorOrange '╚ ')${mversion} 
 $(ColorOrange '----------Check for Script Updates---------')
-$(ColorOrange '-')$(ColorGreen ' 1)') Check for Nimdy Script Updates
+$(ColorOrange '-')$(ColorGreen ' 1)') Check for Menu Script Updates
 $(ColorOrange '-----------Valheim Server Commands---------')
 $(ColorOrange '-')$(ColorGreen ' 2)') Server Admin Tools 
 $(ColorOrange '-')$(ColorGreen ' 3)') Tech Support Tools
