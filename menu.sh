@@ -874,7 +874,7 @@ $(ColorBlue 'Choose an option:') "
         case $a in
 	        1) valheim_server_install ; server_install_menu ;;
            	    0) menu ; menu ;;
-		    *) echo -e $RED"Wrong option."$CLEAR; WrongCommand;;
+		    *)  echo -ne " $(ColorRed 'Wrong option.')" ; server_install_menu ;;
         esac
 }
 ########################################################################
@@ -960,7 +960,7 @@ $(ColorBlue 'Choose an option:') "
 		5) display_network_info ; tech_support ;;
 	        6) display_player_history ; tech_support ;;
 		  0) menu ; menu ;;
-		    *) echo -e $RED"Wrong option."$CLEAR; WrongCommand;;
+		    *)  echo -ne " $(ColorRed 'Wrong option.')" ; tech_support ;;
         esac
 }
 
@@ -997,7 +997,7 @@ $(ColorBlue 'Choose an option:') "
 		7) confirm_check_apply_server_updates ; admin_tools_menu ;;
 		8) valheim_server_install ; admin_tools_menu ;;
 		   0) menu ; menu ;;
-		    *) echo -e $RED"Wrong option."$CLEAR; WrongCommand;;
+		    *)  echo -ne " $(ColorRed 'Wrong option.')" ; admin_tools_menu ;;
         esac
 }
 
@@ -1109,7 +1109,7 @@ $(ColorBlue 'Choose an option:') "
 		4) other_mods ; valheim_mods_options ;;
 		   0) mods_menu ; menu ;;
 		   00) menu ; menu ;;
-		    *) echo -e $RED"Wrong option."$CLEAR; WrongCommand;;
+		    *)  echo -ne " $(ColorRed 'Wrong option.')" ; valheim_mods_options ;;
         esac
 }
 
@@ -1133,7 +1133,7 @@ $(ColorBlue 'Choose an option:') "
 		3) update_valheim_mods ; mods_menu ;;
 		4) valheim_mods_options ; mods_menu ;;
 		   0) menu ; menu ;;
-		    *) echo -e $RED"Wrong option."$CLEAR; WrongCommand;;
+		    *)  echo -ne " $(ColorRed 'Wrong option.')" ; mods_menu ;;
         esac
 }
 ########################################################################
