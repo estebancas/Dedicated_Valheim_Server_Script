@@ -348,7 +348,7 @@ echo ""
 sleep 5
 
 #install steamcmd and libsd12-2
-tput setaf 1; echo "Installing steamcmd and libsdl2"
+tput setaf 1; echo "Installing steamcmd and libsdl2" ; tput setaf 9;
 echo steam steam/question select "I AGREE" | sudo debconf-set-selections
 echo steam steam/license note '' | sudo debconf-set-selections
 apt install steamcmd libsdl2-2.0-0 libsdl2-2.0-0:i386 -y
@@ -1179,7 +1179,7 @@ $(ColorBlue 'Choose an option:') "
 		4) server_install_menu ; menu ;;
 		5) mods_menu ; menu ;;
 		    0) exit 0 ;;
-		    *) echo -e $RED"Wrong option."$CLEAR; WrongCommand;;
+		    *)  echo -ne " $(ColorRed 'Wrong option.')" ; menu ;;
         esac
 }
 
