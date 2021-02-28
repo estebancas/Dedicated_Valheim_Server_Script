@@ -344,8 +344,6 @@ tput setaf 2; echo "Public Server Name:      $displayname " ; tput setaf 9;
 tput setaf 2; echo "Local World Name:        $worldname " ; tput setaf 9;
 tput setaf 2; echo "Valheim Server Password: $password " ; tput setaf 9;
 tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-export confDisplayName="'${displayname}'"
-export confValheimPassword=$password
 echo ""
 sleep 5
 
@@ -386,7 +384,6 @@ sleep 1
 tput setaf 2; echo "Done" ; tput setaf 9;
 sleep 1
 
-##Adding additional Variables to allow for editing from menu later.
 #build config for start_valheim.sh
 tput setaf 1; echo "Deleting old configuration if file exist" ; tput setaf 9;  
 tput setaf 1; echo "Building Valheim start_valheim server configuration" ; tput setaf 9;
@@ -394,36 +391,17 @@ tput setaf 1; echo "Building Valheim start_valheim server configuration" ; tput 
 sleep 1
 cat >> ${valheimInstallPath}/start_valheim.sh <<EOF
 #!/bin/bash
-export templdpath=$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=./linux64:$LD_LIBRARY_PATH
+export templdpath=\$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=./linux64:\$LD_LIBRARY_PATH
 export SteamAppId=892970
-
-setConfDisplayName=$confDisplayName
-setConfValheimPassword=$confValheimPassword
-
 # Tip: Make a local copy of this script to avoid it being overwritten by steam.
-# NOTE: You need to make sure the ports 2456-2458 is being forwarded to your server through your local router & firewall
-./valheim_server.x86_64 -name $setConfDisplayName -port 2456 -nographics -batchmode -world "Thorsunderwear" -password $setConfValheimPassword
-
-#export LD_LIBRARY_PATH=
-export LD_LIBRARY_PATH=$templdpath
+# NOTE: You need to make sure the ports 2456-2458 is being forwarded to your server through your local router & firewall.
+./valheim_server.x86_64 -name "${displayname}" -port 2456 -nographics -batchmode -world "${worldname}" -password "${password}"
+#export LD_LIBRARY_PATH=$templdpath
+export LD_LIBRARY_PATH=\$templdpath
 EOF
 tput setaf 2; echo "Done" ; tput setaf 9;
 sleep 1
-
-######REMOVE AFTER SUCCESSFUL TESTING
-##!/bin/bash
-#export templdpath=\$LD_LIBRARY_PATH
-#export LD_LIBRARY_PATH=./linux64:\$LD_LIBRARY_PATH
-#export SteamAppId=892970
-# Tip: Make a local copy of this script to avoid it being overwritten by steam.
-# NOTE: You need to make sure the ports 2456-2458 is being forwarded to your server through your local router & firewall.
-#./valheim_server.x86_64 -name "${displayname}" -port 2456 -nographics -batchmode -world "${worldname}" -password "${password}"
-#export LD_LIBRARY_PATH=$templdpath
-#export LD_LIBRARY_PATH=\$templdpath
-#EOF
-#tput setaf 2; echo "Done" ; tput setaf 9;
-#sleep 1
 
 #build check log script
 tput setaf 1; echo "Deleting old check log script if exist" ; tput setaf 9; 
@@ -586,7 +564,7 @@ function restore_world_data() {
     bIndex=$((bIndex+1))
     done
 #promt user for index
-tput setaf 2; echo "Select Backup File you wish to restore"  ; tput setaf 9;
+tput setaf 2; echo "Select Backup File you wish to restore" ; tput setaf 9;
     read -p "" selectedIndex
 #show confirmation message
 restorefile=$(basename "${backups[$selectedIndex-1]}")
@@ -954,30 +932,6 @@ clear
     echo ""
 
 }
-
-
-
-########################################################################
-##################Change Valheim Configuration File#####################
-########################################################################
-
-function change_valheim_server_password() {
-clear
-    echo ""
-    sudo cat /var/log/syslog | grep ZDOID
-    echo ""
-
-}
-
-function change_valheim_server_public_name() {
-clear
-    echo ""
-    sudo cat /var/log/syslog | grep ZDOID
-    echo ""
-
-}
-
-
 
 ########################################################################
 #####################Sub Tech Support Menu System#######################
