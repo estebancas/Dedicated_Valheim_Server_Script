@@ -402,8 +402,8 @@ setConfDisplayName=$confDisplayName
 setConfValheimPassword=$confValheimPassword
 
 # Tip: Make a local copy of this script to avoid it being overwritten by steam.
-# NOTE: You need to make sure the ports 2456-2458 is being forwarded to your server through your local router & firewall.
-./valheim_server.x86_64 -name ${setConfDisplayName} -port 2456 -nographics -batchmode -world "Thorsunderwear" -password ${setConfValheimPassword}
+# NOTE: You need to make sure the ports 2456-2458 is being forwarded to your server through your local router & firewall
+./valheim_server.x86_64 -name $setConfDisplayName -port 2456 -nographics -batchmode -world "Thorsunderwear" -password $setConfValheimPassword
 
 #export LD_LIBRARY_PATH=
 export LD_LIBRARY_PATH=$templdpath
