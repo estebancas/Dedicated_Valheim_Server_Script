@@ -933,6 +933,30 @@ clear
 
 }
 
+
+
+########################################################################
+##################Change Valheim Configuration File#####################
+########################################################################
+
+function change_valheim_server_password() {
+clear
+    echo ""
+    sudo cat /var/log/syslog | grep ZDOID
+    echo ""
+
+}
+
+function change_valheim_server_public_name() {
+clear
+    echo ""
+    sudo cat /var/log/syslog | grep ZDOID
+    echo ""
+
+}
+
+
+
 ########################################################################
 #####################Sub Tech Support Menu System#######################
 ########################################################################
