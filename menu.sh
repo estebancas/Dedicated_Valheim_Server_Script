@@ -395,12 +395,12 @@ export templdpath=\$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=./linux64:\$LD_LIBRARY_PATH
 export SteamAppId=892970
 
-setConfDisplayName=$displayName
+setConfDisplayName="${displayName}"
 setConfValheimPassword=$password
 
 # Tip: Make a local copy of this script to avoid it being overwritten by steam.
 # NOTE: You need to make sure the ports 2456-2458 is being forwarded to your server through your local router & firewall
-./valheim_server.x86_64 -name ${setConfDisplayName} -port 2456 -nographics -batchmode -world "${worldname}" -password "${setConfValheimPassword}"
+./valheim_server.x86_64 -name "${setConfDisplayName}" -port 2456 -nographics -batchmode -world "${worldname}" -password "${setConfValheimPassword}"
 
 export LD_LIBRARY_PATH=\$templdpath
 EOF
