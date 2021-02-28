@@ -389,14 +389,15 @@ tput setaf 1; echo "Deleting old configuration if file exist" ; tput setaf 9;
 tput setaf 1; echo "Building Valheim start_valheim server configuration" ; tput setaf 9;
 [ -e ${valheimInstallPath}/start_valheim.sh ] && rm ${valheimInstallPath}/start_valheim.sh
 sleep 1
+
+setConfDisplayName="'$displayName'"
+setConfValheimPassword=$password
+
 cat >> ${valheimInstallPath}/start_valheim.sh <<EOF
 #!/bin/bash
 export templdpath=\$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=./linux64:\$LD_LIBRARY_PATH
 export SteamAppId=892970
-
-setConfDisplayName="'$displayName'"
-setConfValheimPassword=$password
 
 # Tip: Make a local copy of this script to avoid it being overwritten by steam.
 # NOTE: You need to make sure the ports 2456-2458 is being forwarded to your server through your local router & firewall
