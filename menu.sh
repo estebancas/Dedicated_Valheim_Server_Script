@@ -1270,8 +1270,8 @@ echo ""
     while true; do
     read -p "Which port do you want to set:" setCurrentPort
     echo ""
-     #if y, then continue, else cancel and check for port ranges, so folks dont mess this up
-    [[ ${confirmServerPortChange} == "y" ]] && [[ ${#setCurrentPort} -ge 4 && ${#setCurrentPort} -le 6 ]] && [[ $setCurrentPort -gt 1024 && $setCurrentPort -le 65530 ]] && [[ "$setCurrentPort" =~ ^[[:alnum:]]+$ ]] && break
+     #check to make sure nobody types stupid Loki Jokes in here
+    [[ ${#setCurrentPort} -ge 4 && ${#setCurrentPort} -le 6 ]] && [[ $setCurrentPort -gt 1024 && $setCurrentPort -le 65530 ]] && [[ "$setCurrentPort" =~ ^[[:alnum:]]+$ ]] && break
     echo ""
     echo "Try again, Loki got you or you typed something wrong or your port range is incorrect"
   done
