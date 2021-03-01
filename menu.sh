@@ -1164,7 +1164,7 @@ echo ""
     tput setaf 2; echo "Current Public Display Name: $setCurrentDisplayName " ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     tput setaf 2; echo "Good Example: Zero's Viking Server" ; tput setaf 9;
-    tput setaf 1; echo -e "Bad Example: [Pr0] Zero's #1 LIT$$ ^ *&![]{}@# Server bruuuh" ; tput setaf 9;
+    tput setaf 1; echo -e "Bad Example: '[Pr0] Zero's '#1' 'LIT$$' '^' '*&![]{}@' Server bruuuh" ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     echo ""
       read -p "Enter new public server display name: " setCurrentDisplayName
