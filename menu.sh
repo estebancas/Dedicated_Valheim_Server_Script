@@ -1260,10 +1260,10 @@ echo ""
     tput setaf 1; echo "UNIQUE means Password can not match Public and World Names" ; tput setaf 9;
     tput setaf 1; echo "Do not use SPECIAL characters:" ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 2; echo "Current Access Password: ${currentPassword} " ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     tput setaf 5; echo "Current Public Display Name:" ${setCurrentDisplayName} ; tput setaf 9;
     tput setaf 5; echo "Current World Name:" ${setCurrentWorldName} ; tput setaf 9;
+    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    tput setaf 2; echo "Current Access Password: ${currentPassword} " ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     while true; do
     tput setaf 1; echo "This password must be 5 Characters or more" ; tput setaf 9;
@@ -1295,7 +1295,7 @@ export LD_LIBRARY_PATH=./linux64:\$LD_LIBRARY_PATH
 export SteamAppId=892970
 # Tip: Make a local copy of this script to avoid it being overwritten by steam.
 # NOTE: You need to make sure the ports 2456-2458 is being forwarded to your server through your local router & firewall.
-./valheim_server.x86_64 -name ${setCurrentDisplayName} -port ${setCurrentPort} -nographics -batchmode -world ${setCurrentWorldName} -password ${setCurrentPassword}
+./valheim_server.x86_64 -name ${setCurrentDisplayName} -port ${setCurrentPort} -nographics -batchmode -world ${setCurrentWorldName} -password "${setCurrentPassword}"
 export LD_LIBRARY_PATH=\$templdpath
 EOF
        tput setaf 1; echo "Cleaning Logs" ; tput setaf 9;
