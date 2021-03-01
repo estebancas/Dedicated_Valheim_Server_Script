@@ -29,7 +29,7 @@ backupPath=/home/steam/backups
 ###############################################################
 
 # Set Menu Version
-mversion="Version 1.7.8-Loki"
+mversion="Version 1.8-Loki"
 ##
 # Update Menu script 
 ##
@@ -44,6 +44,7 @@ mversion="Version 1.7.8-Loki"
 # -Restart Valheim Server: Restarts the Valheim Service (stop/start)
 # -Status Valheim Server: Displays the current status of the Valheim Server Service
 # -Check and Apply Valheim Server Update: Reaches out to to Steam with steamcmd and looks for official updates. If found applies them and restarts Valheim services
+# -Edit Valheim Configuration File from menu
 # -Fresh Valheim Server: Installs Valheim server from official Steam repo. 
 ##
 
