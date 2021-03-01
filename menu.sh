@@ -1170,10 +1170,13 @@ echo ""
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     echo ""
     echo -ne "
-    $(ColorOrange 'Old Public Display Name: ${currentDisplayName} ') "
+    $(ColorOrange 'Old Public Display Name:')" ${currentDisplayName}
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    echo ""
     tput setaf 1; echo "New Public Display Name:" ${setCurrentDisplayName} ; tput setaf 9;
+    echo ""
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    echo ""
     read -p "Do you wish to continue with these changes? (y=Yes, n=No):" confirmPublicNameChange
     #if y, then continue, else cancel
         if [ "$confirmPublicNameChange" == "y" ]; then
@@ -1188,11 +1191,16 @@ export LD_LIBRARY_PATH=./linux64:\$LD_LIBRARY_PATH
 export SteamAppId=892970
 # Tip: Make a local copy of this script to avoid it being overwritten by steam.
 # NOTE: You need to make sure the ports 2456-2458 is being forwarded to your server through your local router & firewall.
-./valheim_server.x86_64 -name "${setCurrentDisplayName}" -port "${setCurrentPort}" -nographics -batchmode -world "${setCurrentWorldName}" -password "${setCurrentPassword}"
+./valheim_server.x86_64 -name "${setCurrentDisplayName}" -port ${setCurrentPort} -nographics -batchmode -world ${setCurrentWorldName} -password ${setCurrentPassword}
 export LD_LIBRARY_PATH=\$templdpath
 EOF
        echo "Cleaning Logs"
        rm currentConf.log
+       echo "Done"
+       echo "Setting Ownership to steam user and execute permissions on " ${valheimInstallPath}/start_valheim.sh 
+       chown steam:steam ${valheimInstallPath}/start_valheim.sh
+       chmod +x ${valheimInstallPath}/start_valheim.sh
+       echo "done"
        echo "Restarting Valheim Server Service"
        sudo systemctl restart valheimserver.service
        echo ""
