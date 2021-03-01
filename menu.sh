@@ -1278,7 +1278,7 @@ echo ""
     read -p "Do you wish to continue with these changes? (y=Yes, n=No):" confirmServerPortChange
     echo ""
     #read -p "Do you wish to continue with these changes? (y=Yes, n=No):" confirmServerPortChange
-    if y, then continue, else cancel
+    #if y, then continue, else cancel
     if [ "$confirmServerPortChange" == "y" ]; then
         tput setaf 1; echo "Deleting old configuration if file exist" ; tput setaf 9;  
         [ -e ${valheimInstallPath}/start_valheim.sh ] && rm ${valheimInstallPath}/start_valheim.sh
