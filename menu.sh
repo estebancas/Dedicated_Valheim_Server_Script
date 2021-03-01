@@ -559,26 +559,26 @@ restorefile=$(basename "${backups[$selectedIndex-1]}")
 echo -ne "
 $(ColorRed '------------------------------------------------------------')
 $(ColorGreen 'Restore '${restorefile}' ?')
-$(ColorGreen  'Are you sure you want to do this? ')
-$(ColorOrange  'Remember to match world name with '${valheimInstallPath}'/start_valheim.sh')
-$(ColorOrange  'The param for -world "worldname" much match restore file worldname.db and worldname.fwl')
-$(ColorGreen   'Press y (for yes) or n (for no)') "
+$(ColorGreen 'Are you sure you want to do this? ')
+$(ColorOrange 'Remember to match world name with '${valheimInstallPath}'/start_valheim.sh')
+$(ColorOrange 'The param for -world "worldname" much match restore file worldname.db and worldname.fwl')
+$(ColorGreen 'Press y (for yes) or n (for no)') "
 
 #read user input confirmation
-    read -p "" confirmBackup
+    read -p "Press y or n:" confirmBackupRestore
 #if y, then continue, else cancel
-        if [ "$confirmBackup" == "y" ]; then
+        if [ "$confirmBackupRestore" == "y" ]; then
  #stop valheim server
-        echo "Stopping Valheim Server"
+        tput setaf 1; echo "Stopping Valheim Server" ; tput setaf 9;
         systemctl stop valheimserver.service
-        echo "Stopped"
+        tput setaf 2; echo "Valheim Services successfully Stopped" ; tput setaf 9;
  #give it a few
         sleep 5
  #copy backup to worlds folder
-        echo "Copying ${backups[$selectedIndex-1]} to ${worldpath}/"
-        cp ${backups[$selectedIndex-1]} ${worldpath}/
+        tput setaf 2; echo "Copying ${backups[$selectedIndex-1]} to ${worldpath}/" ; tput setaf 9;
+        #cp ${backups[$selectedIndex-1]} ${worldpath}/
  #untar
-        echo "Unpacking ${worldpath}/${restorefile}"
+        tput setaf 2; echo "Unpacking ${worldpath}/${restorefile}" ; tput setaf 9;
         tar xzf ${worldpath}/${restorefile} --strip-components=7 --directory ${worldpath}/  
 	chown -Rf steam:steam ${worldpath}
 	#uncomment when test are 100%
@@ -586,11 +586,11 @@ $(ColorGreen   'Press y (for yes) or n (for no)') "
 	#really jacked stuff up - DAMN IT LOKI!!!
 	#chown -Rf steam:steam $worldpath
  #start valheim server
-        echo "Starting Valheim Services"
-        echo "This better work Loki!"
+        tput setaf 2; echo "Starting Valheim Services" ; tput setaf 9;
+        tput setaf 2; echo "This better work Loki!" ; tput setaf 9;
         systemctl start valheimserver.service
 else
-        echo "Canceling restore process because Loki sucks"
+        tput setaf 2; echo "Canceling restore process because Loki sucks" ; tput setaf 9;
 fi
 
 }
