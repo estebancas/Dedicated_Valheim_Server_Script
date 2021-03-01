@@ -1192,9 +1192,9 @@ echo ""
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     tput setaf 1; echo "New Public Display Name:" $setCurrentDisplaName ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    read -p "Do you wish to continue with these changes? (y=Yes, n=No):" confirmRestart
+    read -p "Do you wish to continue with these changes? (y=Yes, n=No):" confirmPublicNameChange
     #if y, then continue, else cancel
-        if [ "$confirmRestart" == "y" ]; then
+        if [ "$confirmPublicNameChange" == "y" ]; then
         tput setaf 1; echo "Deleting old configuration if file exist" ; tput setaf 9;  
         tput setaf 1; echo "Rebuilding Valheim start_valheim.sh configuration file" ; tput setaf 9;
         [ -e ${valheimInstallPath}/start_valheim.sh ] && rm ${valheimInstallPath}/start_valheim.sh
@@ -1218,22 +1218,10 @@ EOF
         echo "Canceled the renaming of Public Valheim Server Display Name - because Loki sucks"
         sleep 3
     clear
-fi
-    
-    
-    
-    
-    
-    
-    
-    
-
-
-
-
+ fi
+ 
 }
-
-
+    
 function change_default_server_port() {
 
 }
