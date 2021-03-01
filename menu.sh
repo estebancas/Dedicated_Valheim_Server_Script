@@ -849,7 +849,7 @@ $(ColorOrange '----------------Server System Information-------------------')
 $(ColorOrange '-')$(ColorGreen '1)') Fresh or Reinstall Valheim Server
 $(ColorOrange '-')$(ColorGreen '0)') Go to Main Menu
 $(ColorOrange '------------------------------------------------------------')
-$(ColorBlue 'Choose an option:') "
+$(ColorPurple 'Choose an option:') "
         read a
         case $a in
 	        1) valheim_server_install ; server_install_menu ;;
@@ -930,7 +930,7 @@ $(ColorOrange '-')$(ColorGreen ' 6)') Display Connected Players History
 $(ColorOrange '------------------------------------------------------------')
 $(ColorOrange '-')$(ColorGreen ' 0)') Go to Main Menu
 $(ColorOrange '------------------------------------------------------------')
-$(ColorBlue 'Choose an option:') "
+$(ColorPurple 'Choose an option:') "
         read a
         case $a in
 	        1) display_start_valheim ; tech_support ;; 
@@ -967,7 +967,7 @@ $(ColorOrange '------------------------------------------------------------')
 $(ColorOrange '-')$(ColorGreen ' 9)') Edit Valheim Startup Config File
 $(ColorOrange '------------------------------------------------------------')
 $(ColorOrange '-')$(ColorGreen ' 0)') Go to Main Menu
-$(ColorBlue 'Choose an option:') "
+$(ColorPurple 'Choose an option:') "
         read a
         case $a in
 		1) backup_world_data ; admin_tools_menu ;;
@@ -1083,7 +1083,7 @@ $(ColorCyan '-')$(ColorGreen ' 4)') Other Mods
 $(ColorCyan '------------------------------------------------------------')
 $(ColorCyan '-')$(ColorGreen ' 0)') Go to Valheim Mod Main Menu
 $(ColorCyan '-')$(ColorGreen ' 00)') Go to Main Menu
-$(ColorBlue 'Choose an option:') "
+$(ColorPurple 'Choose an option:') "
         read a
         case $a in
 		1) server_mods ; valheim_mods_options ;;
@@ -1108,7 +1108,7 @@ $(ColorCyan '---------------------Valheim Mod Menu----------------------')
 $(ColorCyan '-')$(ColorGreen ' 4)') Valheim Mods Options
 $(ColorCyan '------------------------------------------------------------')
 $(ColorCyan '-')$(ColorGreen ' 0)') Go to Main Menu
-$(ColorBlue 'Choose an option:') "
+$(ColorPurple 'Choose an option:') "
         read a
         case $a in
 		1) install_mod_valheim ; mods_menu ;;
@@ -1170,7 +1170,7 @@ echo ""
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     echo ""
     echo -ne "
-    $(ColorOrange 'Old Public Display Name:')" ${currentDisplayName}
+    tput setaf 5; echo "Old Public Display Name: " ${currentDisplayName} ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     echo ""
     tput setaf 1; echo "New Public Display Name:" ${setCurrentDisplayName} ; tput setaf 9;
@@ -1252,7 +1252,7 @@ $(ColorOrange '------------------------------------------------------------')
 $(ColorOrange '-')$(ColorGreen ' 0)') Go to Admin Tools Menu
 $(ColorOrange '-')$(ColorGreen ' 00)') Go to Main Menu
 $(ColorOrange '------------------------------------------------------------')
-$(ColorBlue 'Choose an option:') "
+$(ColorPurple 'Choose an option:') "
         read a
         case $a in
 	        1) change_public_display_name ; admin_valheim_config_edit ;; 
@@ -1297,7 +1297,7 @@ $(ColorOrange '-')$(ColorGreen ' 5)') Coming Soon
 $(ColorOrange '-------------------------------------------')
 $(ColorGreen ' 0)') Exit
 $(ColorOrange '-------------------------------------------')
-$(ColorBlue 'Choose an option:') "
+$(ColorPurple 'Choose an option:') "
         read a
         case $a in
 	        1) script_check_update ; menu ;;
