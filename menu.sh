@@ -1270,16 +1270,16 @@ echo ""
     while true; do
     read -p "Which port do you want to set:" setCurrentPort
     echo ""
-    read -p "Do you wish to continue with these changes? (y=Yes, n=No):" confirmServerPortChange
-    #if y, then continue, else cancel and check for port ranges, so folks dont mess this up
+     #if y, then continue, else cancel and check for port ranges, so folks dont mess this up
     [[ ${confirmServerPortChange} == "y" ]] && [[ ${#setCurrentPort} -ge 4 && ${#setCurrentPort} -le 6 ]] && [[ $setCurrentPort -gt 1024 && $setCurrentPort -le 65530 ]] && [[ "$setCurrentPort" =~ ^[[:alnum:]]+$ ]] && break
     echo ""
     echo "Try again, Loki got you or you typed something wrong or your port range is incorrect"
   done
+    read -p "Do you wish to continue with these changes? (y=Yes, n=No):" confirmServerPortChange
     echo ""
-     #read -p "Do you wish to continue with these changes? (y=Yes, n=No):" confirmServerPortChange
-     #if y, then continue, else cancel
-     #if [ "$confirmServerPortChange" == "y" ]; then
+    #read -p "Do you wish to continue with these changes? (y=Yes, n=No):" confirmServerPortChange
+    if y, then continue, else cancel
+    if [ "$confirmServerPortChange" == "y" ]; then
         tput setaf 1; echo "Deleting old configuration if file exist" ; tput setaf 9;  
         [ -e ${valheimInstallPath}/start_valheim.sh ] && rm ${valheimInstallPath}/start_valheim.sh
         tput setaf 1; echo "Rebuilding Valheim start_valheim.sh configuration file" ; tput setaf 9;
