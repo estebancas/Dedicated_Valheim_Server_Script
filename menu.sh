@@ -1298,7 +1298,10 @@ EOF
 function change_local_world_name() {
 
 echo ""
-echo "Adding this, not ready yet"
+echo "Not sure if I should allow people to do this"
+echo "Follow the wiki, if you feel the need to change your world name"
+echo "https://github.com/Nimdy/Dedicated_Valheim_Server_Script/wiki/Migrate-Valheim-Map-Data-from-server-to-server"
+echo "I fear to many people will end up breaking their servers, if I add this now"
 echo "Don't you have some bees to go check on?"
 echo ""
 
