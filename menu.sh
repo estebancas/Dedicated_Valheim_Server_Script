@@ -1217,13 +1217,6 @@ EOF
     
 function change_default_server_port() {
 
-#grep -oP '".*?"' ${valheimInstallPath}/start_valheim.sh > currentConf.log
-#currentConfig=currentConf.log
-#currentDisplayName=$(sed -n 1p $currentConfig)
-#currentPort=$(sed -n 2p $currentConfig)
-#currentWorldName=$(sed -n 3p $currentConfig)
-#currentPassword=$(sed -n 4p $currentConfig)
-
 currentDisplayName=$(perl -n -e '/\-name "?([^"]+)"? \-port/ && print "$1\n"' ${valheimInstallPath}/start_valheim.sh)
 currentPort=$(perl -n -e '/\-port "?([^"]+)"? \-nographics/ && print "$1\n"' ${valheimInstallPath}/start_valheim.sh)
 currentWorldName=$(perl -n -e '/\-world "?([^"]+)"? \-password/ && print "$1\n"' ${valheimInstallPath}/start_valheim.sh)
@@ -1254,17 +1247,11 @@ echo ""
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     tput setaf 2; echo "Current Server Port: ${setCurrentPort} " ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    echo ""
-      read -p "Enter new Server Port (Default:2456): " setCurrentPort
-    echo ""
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    echo ""
     tput setaf 5; echo "Old Server Port: " ${currentPort} ; tput setaf 9;
-    echo ""
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     echo ""
     while true; do
-    read -p "Which port do you want to set:" setCurrentPort
+    read -p "Enter new Server Port (Default:2456): " setCurrentPort
     echo ""
      #check to make sure nobody types stupid Loki Jokes in here
     [[ ${#setCurrentPort} -ge 4 && ${#setCurrentPort} -le 6 ]] && [[ $setCurrentPort -gt 1024 && $setCurrentPort -le 65530 ]] && [[ "$setCurrentPort" =~ ^[[:alnum:]]+$ ]] && break
