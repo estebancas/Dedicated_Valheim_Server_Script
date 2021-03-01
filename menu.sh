@@ -1134,8 +1134,6 @@ grep -oP '".*?"' ${valheimInstallPath}/start_valheim.sh > currentConf.log
 
 currentConfig=currentConf.log
 currentDisplayName=$(sed -n 1p $currentConfig)
-new_filename=$(echo "$a" | sed 's/.txt/.log/')
-
 currentPort=$(sed -n 2p $currentConfig)
 currentWorldName=$(sed -n 3p $currentConfig)
 currentPassword=$(sed -n 4p $currentConfig)
@@ -1235,8 +1233,6 @@ grep -oP '".*?"' ${valheimInstallPath}/start_valheim.sh > currentConf.log
 
 currentConfig=currentConf.log
 currentDisplayName=$(sed -n 1p $currentConfig)
-new_filename=$(echo "$a" | sed 's/.txt/.log/')
-
 currentPort=$(sed -n 2p $currentConfig)
 currentWorldName=$(sed -n 3p $currentConfig)
 currentPassword=$(sed -n 4p $currentConfig)
@@ -1299,7 +1295,7 @@ export LD_LIBRARY_PATH=./linux64:\$LD_LIBRARY_PATH
 export SteamAppId=892970
 # Tip: Make a local copy of this script to avoid it being overwritten by steam.
 # NOTE: You need to make sure the ports 2456-2458 is being forwarded to your server through your local router & firewall.
-./valheim_server.x86_64 -name "${setCurrentDisplayName}" -port ${setCurrentPort} -nographics -batchmode -world ${setCurrentWorldName} -password ${setCurrentPassword}
+./valheim_server.x86_64 -name ${setCurrentDisplayName} -port ${setCurrentPort} -nographics -batchmode -world ${setCurrentWorldName} -password ${setCurrentPassword}
 export LD_LIBRARY_PATH=\$templdpath
 EOF
        tput setaf 1; echo "Cleaning Logs" ; tput setaf 9;
