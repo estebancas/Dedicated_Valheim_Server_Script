@@ -1212,10 +1212,84 @@ EOF
     
 function change_default_server_port() {
 
-echo ""
-echo "Adding this, not ready yet"
-echo "Don't you have some bees to go check on?"
-echo ""
+#grep -oP '".*?"' ${valheimInstallPath}/start_valheim.sh > currentConf.log
+#currentConfig=currentConf.log
+#currentDisplayName=$(sed -n 1p $currentConfig)
+#currentPort=$(sed -n 2p $currentConfig)
+#currentWorldName=$(sed -n 3p $currentConfig)
+#currentPassword=$(sed -n 4p $currentConfig)
+
+currentDisplayName=$(perl -n -e '/\-name "?([^"]+)"? \-port/ && print "$1\n"' ${valheimInstallPath}/start_valheim.sh)
+currentPort=$(perl -n -e '/\-port "?([^"]+)"? \-nographics/ && print "$1\n"' ${valheimInstallPath}/start_valheim.sh)
+currentWorldName=$(perl -n -e '/\-world "?([^"]+)"? \-password/ && print "$1\n"' ${valheimInstallPath}/start_valheim.sh)
+currentPassword=$(perl -n -e '/\-password "?([^"]+)"?$/ && print "$1\n"' ${valheimInstallPath}/start_valheim.sh)
+clear
+echo "Current Public Server Name: ${currentDisplayName} "
+echo "Current Port Information(default:2456): ${currentPort} "
+echo "Current Local World Name: ${currentWorldName} Do not change unless you know what you are doing"
+echo "Current Server Access Password: ${currentPassword} "
+
+#assign current varibles to set variables
+#if no are changes are made set variables will write to new config file anyways. No harm done
+#if changes are made set variables are updated with new data and will be wrote to new config file
+
+setCurrentDisplayName=$currentDisplayName
+setCurrentPort=$currentPort
+setCurrentWorldName=$currentWorldName
+setCurrentPassword=$currentPassword
+
+echo ""        
+    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    tput setaf 2; echo "---------------------Set New Server Port--------------------" ; tput setaf 9;
+    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    tput setaf 1; echo "Now for Loki, please follow instructions" ; tput setaf 9;
+    tput setaf 1; echo "The Server is required to have a port to operate on" ; tput setaf 9;
+    tput setaf 1; echo "Do not use SPECIAL characters:" ; tput setaf 9;
+    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    tput setaf 2; echo "Current Server Port: ${setCurrentPort} " ; tput setaf 9;
+    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    echo ""
+      read -p "Enter new public server display name: " setCurrentPort
+    echo ""
+    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    echo ""
+    tput setaf 5; echo "Old Server Port: " ${currentPort} ; tput setaf 9;
+    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    echo ""
+    tput setaf 1; echo "New Server Port:" ${setCurrentPort} ; tput setaf 9;
+    echo ""
+    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    echo ""
+    read -p "Do you wish to continue with these changes? (y=Yes, n=No):" confirmServerPortChange
+    #if y, then continue, else cancel
+        if [ "$confirmServerPortChange" == "y" ]; then
+        tput setaf 1; echo "Deleting old configuration if file exist" ; tput setaf 9;  
+        [ -e ${valheimInstallPath}/start_valheim.sh ] && rm ${valheimInstallPath}/start_valheim.sh
+        tput setaf 1; echo "Rebuilding Valheim start_valheim.sh configuration file" ; tput setaf 9;
+        sleep 1
+cat >> ${valheimInstallPath}/start_valheim.sh <<EOF
+#!/bin/bash
+export templdpath=\$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=./linux64:\$LD_LIBRARY_PATH
+export SteamAppId=892970
+# Tip: Make a local copy of this script to avoid it being overwritten by steam.
+# NOTE: You need to make sure the ports 2456-2458 is being forwarded to your server through your local router & firewall.
+./valheim_server.x86_64 -name "${setCurrentDisplayName}" -port ${setCurrentPort} -nographics -batchmode -world ${setCurrentWorldName} -password ${setCurrentPassword}
+export LD_LIBRARY_PATH=\$templdpath
+EOF
+       echo "Setting Ownership to steam user and execute permissions on " ${valheimInstallPath}/start_valheim.sh 
+       chown steam:steam ${valheimInstallPath}/start_valheim.sh
+       chmod +x ${valheimInstallPath}/start_valheim.sh
+       echo "done"
+       echo "Restarting Valheim Server Service"
+       sudo systemctl restart valheimserver.service
+       echo ""
+    else
+        echo "Canceled the changing of Server Port for Valheim - because Loki sucks"
+        sleep 3
+    clear
+ fi
+ 
 
 }
 
