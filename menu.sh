@@ -984,6 +984,8 @@ $(ColorOrange '-')$(ColorGreen ' 7)') Check and Apply Valheim Server Update
 $(ColorOrange '------------------First Time or Reinstall-------------------')
 $(ColorOrange '-')$(ColorGreen ' 8)') Fresh Valheim Server
 $(ColorOrange '------------------------------------------------------------')
+$(ColorOrange '-')$(ColorGreen ' 9)') Edit Valheim Startup Config File
+$(ColorOrange '------------------------------------------------------------')
 $(ColorOrange '-')$(ColorGreen ' 0)') Go to Main Menu
 $(ColorBlue 'Choose an option:') "
         read a
@@ -996,6 +998,7 @@ $(ColorBlue 'Choose an option:') "
 		6) display_valheim_server_status ; admin_tools_menu ;;
 		7) confirm_check_apply_server_updates ; admin_tools_menu ;;
 		8) valheim_server_install ; admin_tools_menu ;;
+		9) admin_valheim_config_edit ; admin_tools_menu ;;		
 		   0) menu ; menu ;;
 		    *)  echo -ne " $(ColorRed 'Wrong option.')" ; admin_tools_menu ;;
         esac
@@ -1178,13 +1181,14 @@ echo ""
     tput setaf 1; echo "Do not use the follow characters:" ; tput setaf 9;
     tput setaf 1; echo -e "BAD: ! @ # $ % ^ & * ( ) { } [ ] ~ ` ' " ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 2; echo "Your public display name: $setCurrentDisplayName " ; tput setaf 9;
+    tput setaf 2; echo "Current Public Display Name: $setCurrentDisplayName " ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     tput setaf 2; echo "Good Example: Zero's Viking Server" ; tput setaf 9;
-    tput setaf 1; echo -e "Bad Example: Zero's #1 LIT$$ ^ *&!@# Server bruuuh" ; tput setaf 9;
+    tput setaf 1; echo -e "Bad Example: [Pr0] Zero's #1 LIT$$ ^ *&![]{}@# Server bruuuh" ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     echo ""
       read -p "Enter new public server display name: " setCurrentDisplayName
+    echo ""
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     echo ""
     echo -ne "
@@ -1196,8 +1200,8 @@ echo ""
     #if y, then continue, else cancel
         if [ "$confirmPublicNameChange" == "y" ]; then
         tput setaf 1; echo "Deleting old configuration if file exist" ; tput setaf 9;  
-        tput setaf 1; echo "Rebuilding Valheim start_valheim.sh configuration file" ; tput setaf 9;
         [ -e ${valheimInstallPath}/start_valheim.sh ] && rm ${valheimInstallPath}/start_valheim.sh
+        tput setaf 1; echo "Rebuilding Valheim start_valheim.sh configuration file" ; tput setaf 9;
         sleep 1
 cat >> ${valheimInstallPath}/start_valheim.sh <<EOF
 #!/bin/bash
@@ -1206,7 +1210,7 @@ export LD_LIBRARY_PATH=./linux64:\$LD_LIBRARY_PATH
 export SteamAppId=892970
 # Tip: Make a local copy of this script to avoid it being overwritten by steam.
 # NOTE: You need to make sure the ports 2456-2458 is being forwarded to your server through your local router & firewall.
-./valheim_server.x86_64 -name "${setCurrentDisplayName}" -port "${setCurrentPort)" -nographics -batchmode -world "${setCurrentWorldName}" -password "${setCurrentPassword}"
+./valheim_server.x86_64 -name "${setCurrentDisplayName}" -port "${setCurrentPort}" -nographics -batchmode -world "${setCurrentWorldName}" -password "${setCurrentPassword}"
 export LD_LIBRARY_PATH=\$templdpath
 EOF
        echo "Cleaning Logs"
@@ -1224,17 +1228,30 @@ EOF
     
 function change_default_server_port() {
 
+echo ""
+echo "Adding this, not ready yet"
+echo "Don't you have some bees to go check on?"
+echo ""
+
 }
 
 function change_local_world_name() {
+
+echo ""
+echo "Adding this, not ready yet"
+echo "Don't you have some bees to go check on?"
+echo ""
 
 }
 
 function change_server_access_password() {
 
+echo ""
+echo "Adding this, not ready yet"
+echo "Don't you have some bees to go check on?"
+echo ""
+
 }
-
-
 
 
 admin_valheim_config_edit(){
