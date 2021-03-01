@@ -565,7 +565,7 @@ $(ColorOrange 'The param for -world "worldname" much match restore file worldnam
 $(ColorGreen 'Press y (for yes) or n (for no)') "
 
 #read user input confirmation
-    read -p "Press y or n:" confirmBackupRestore
+    read -p "" confirmBackupRestore
 #if y, then continue, else cancel
         if [ "$confirmBackupRestore" == "y" ]; then
  #stop valheim server
@@ -576,16 +576,12 @@ $(ColorGreen 'Press y (for yes) or n (for no)') "
         sleep 5
  #copy backup to worlds folder
         tput setaf 2; echo "Copying ${backups[$selectedIndex-1]} to ${worldpath}/" ; tput setaf 9;
-        #cp ${backups[$selectedIndex-1]} ${worldpath}/
+        cp ${backups[$selectedIndex-1]} ${worldpath}/
  #untar
         tput setaf 2; echo "Unpacking ${worldpath}/${restorefile}" ; tput setaf 9;
         tar xzf ${worldpath}/${restorefile} --strip-components=7 --directory ${worldpath}/  
 	chown -Rf steam:steam ${worldpath}
-	#uncomment when test are 100%
-	#last time steam was applied to /usr and other locations 
-	#really jacked stuff up - DAMN IT LOKI!!!
-	#chown -Rf steam:steam $worldpath
- #start valheim server
+	rm ${backups[$selectedIndex-1]} ${worldpath}/
         tput setaf 2; echo "Starting Valheim Services" ; tput setaf 9;
         tput setaf 2; echo "This better work Loki!" ; tput setaf 9;
         systemctl start valheimserver.service
