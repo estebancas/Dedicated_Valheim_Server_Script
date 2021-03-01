@@ -1263,10 +1263,6 @@ echo ""
     echo ""
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     echo ""
-    tput setaf 1; echo "New Server Port:" ${setCurrentPort} ; tput setaf 9;
-    echo ""
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    echo ""
     while true; do
     read -p "Which port do you want to set:" setCurrentPort
     echo ""
