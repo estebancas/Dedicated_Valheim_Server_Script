@@ -1134,14 +1134,16 @@ grep -oP '".*?"' ${valheimInstallPath}/start_valheim.sh > currentConf.log
 
 currentConfig=currentConf.log
 currentDisplayName=$(sed -n 1p $currentConfig)
+new_filename=$(echo "$a" | sed 's/.txt/.log/')
+
 currentPort=$(sed -n 2p $currentConfig)
 currentWorldName=$(sed -n 3p $currentConfig)
 currentPassword=$(sed -n 4p $currentConfig)
 
-echo= "Current Public Server Name: ${currentDisplayName} "
-echo= "Current Port Information: ${currentPort} default:2456 "
-echo= "Current Local World Name: ${currentWorldName} Do not change unless you know what you are doing"
-echo= "Current Server Access Password: ${currentPassword} "
+echo "Current Public Server Name: ${currentDisplayName} "
+echo "Current Port Information: ${currentPort} default:2456 "
+echo "Current Local World Name: ${currentWorldName} Do not change unless you know what you are doing"
+echo "Current Server Access Password: ${currentPassword} "
 
 #assign current varibles to set variables
 #if no are changes are made set variables will write to new config file anyways. No harm done
