@@ -1255,6 +1255,7 @@ echo ""
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     echo ""
     tput setaf 5; echo "Old Server Port: " ${currentPort} ; tput setaf 9;
+    echo ""
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     echo ""
     tput setaf 1; echo "New Server Port:" ${setCurrentPort} ; tput setaf 9;
