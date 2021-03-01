@@ -1169,7 +1169,23 @@ setCurrentPort=$currentPort
 setCurrentWorldName=$currentWorldName
 setCurrentPassword=$currentPassword
 
-
+echo ""        
+    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    tput setaf 2; echo "------------------Set New Public Display Name---------------" ; tput setaf 9;
+    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    tput setaf 1; echo "Now for Loki, please follow instructions" ; tput setaf 9;
+    tput setaf 1; echo "The Server is required to have a public display name" ; tput setaf 9;
+    tput setaf 1; echo "Do not use the follow characters:" ; tput setaf 9;
+    tput setaf 1; echo -e "BAD: ! @ # $ % ^ & * ( ) { } [ ] ~ ` ' " ; tput setaf 9;
+    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    tput setaf 2; echo "Your public display name: $setCurrentDisplayName " ; tput setaf 9;
+    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    tput setaf 2;  echo "Good Example: Zero's Viking Server" ; tput setaf 9;
+    tput setaf 1;  echo "Bad Example: Zero's #1 Server Cash Signs hashtags or other special chars, it will break the script!" ; tput setaf 9;
+    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    echo ""
+      read -p "Enter public server display name: " setCurrentDisplayName
+    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
 
 tput setaf 1; echo "Deleting old configuration if file exist" ; tput setaf 9;  
 tput setaf 1; echo "Rebuilding Valheim start_valheim.sh configuration file" ; tput setaf 9;
