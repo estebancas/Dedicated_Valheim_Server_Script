@@ -1137,9 +1137,106 @@ $(ColorBlue 'Choose an option:') "
         esac
 }
 ########################################################################
-##################FINISH VALHEIM MOD SECTION#######################
+#######################FINISH VALHEIM MOD SECTION#######################
 ########################################################################
 
+
+########################################################################
+##################START CHANGE VALHEIM START CONFIG#####################
+########################################################################
+
+function change_public_display_name() {
+
+grep -oP '".*?"' ${valheimInstallPath}/start_valheim.sh > currentConf.log
+
+currentConfig=currentConf.log
+currentDisplayName=$(sed -n 1p $currentConfig)
+currentPort=$(sed -n 2p $currentConfig)
+currentWorldName=$(sed -n 3p $currentConfig)
+currentPassword=$(sed -n 4p $currentConfig)
+
+echo= "Current Public Server Name: ${currentDisplayName} "
+echo= "Current Port Information: ${currentPort} default:2456 "
+echo= "Current Local World Name: ${currentWorldName} Do not change unless you know what you are doing"
+echo= "Current Server Access Password: ${currentPassword} "
+
+#assign current varibles to set variables
+#if no are changes are made set variables will write to new config file anyways. No harm done
+#if changes are made set variables are updated with new data and will be wrote to new config file
+
+setCurrentDisplayName=$currentDisplayName
+setCurrentPort=$currentPort
+setCurrentWorldName=$currentWorldName
+setCurrentPassword=$currentPassword
+
+
+
+tput setaf 1; echo "Deleting old configuration if file exist" ; tput setaf 9;  
+tput setaf 1; echo "Rebuilding Valheim start_valheim.sh configuration file" ; tput setaf 9;
+
+[ -e ${valheimInstallPath}/start_valheim.sh ] && rm ${valheimInstallPath}/start_valheim.sh
+sleep 1
+cat >> ${valheimInstallPath}/start_valheim.sh <<EOF
+#!/bin/bash
+export templdpath=\$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=./linux64:\$LD_LIBRARY_PATH
+export SteamAppId=892970
+# Tip: Make a local copy of this script to avoid it being overwritten by steam.
+# NOTE: You need to make sure the ports 2456-2458 is being forwarded to your server through your local router & firewall.
+./valheim_server.x86_64 -name "${setCurrentDisplayName}" -port "${setCurrentPort)" -nographics -batchmode -world "${setCurrentWorldName}" -password "${setCurrentPassword}"
+export LD_LIBRARY_PATH=\$templdpath
+EOF
+echo "Cleaning Logs"
+rm currentConf.log
+echo "Restarting Valheim Server Service"
+sudo systemctl restart valheimserver.service
+
+
+}
+
+
+function change_default_server_port() {
+
+}
+
+function change_local_world_name() {
+
+}
+
+function change_server_access_password() {
+
+}
+
+
+
+
+admin_valheim_config_edit(){
+echo ""
+echo -ne "
+$(ColorOrange '------------Change Valheim Startup Config File--------------')
+$(ColorOrange '-')$(ColorGreen ' 1)') Change Public Display Name
+$(ColorOrange '-')$(ColorGreen ' 2)') Change Default Server Port
+$(ColorOrange '-')$(ColorGreen ' 3)') Change Local World Name
+$(ColorOrange '-')$(ColorGreen ' 4)') Change Server Access Password
+$(ColorOrange '------------------------------------------------------------')
+$(ColorOrange '-')$(ColorGreen ' 0)') Go to Admin Tools Menu
+$(ColorOrange '-')$(ColorGreen ' 00)') Go to Main Menu
+$(ColorOrange '------------------------------------------------------------')
+$(ColorBlue 'Choose an option:') "
+        read a
+        case $a in
+	        1) change_public_display_name ; admin_valheim_config_edit ;; 
+		2) change_default_server_port ; admin_valheim_config_edit ;;
+	        3) change_local_world_name ; admin_valheim_config_edit ;;
+		4) change_server_access_password ; admin_valheim_config_edit ;;
+		  0) admin_tools_menu ; admin_tools_menu ;;
+		  00) menu ; menu ;;
+		    *)  echo -ne " $(ColorRed 'Wrong option.')" ; tech_support ;;
+        esac
+}
+########################################################################
+####################END CHANGE VALHEIM START CONFIG#####################
+########################################################################
 
 
 
