@@ -1180,18 +1180,25 @@ echo ""
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     tput setaf 2; echo "Your public display name: $setCurrentDisplayName " ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 2;  echo "Good Example: Zero's Viking Server" ; tput setaf 9;
-    tput setaf 1;  echo "Bad Example: Zero's #1 Server Cash Signs hashtags or other special chars, it will break the script!" ; tput setaf 9;
+    tput setaf 2; echo "Good Example: Zero's Viking Server" ; tput setaf 9;
+    tput setaf 1; echo -e "Bad Example: Zero's #1 LIT$$ ^ *&!@# Server bruuuh" ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     echo ""
-      read -p "Enter public server display name: " setCurrentDisplayName
+      read -p "Enter new public server display name: " setCurrentDisplayName
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-
-tput setaf 1; echo "Deleting old configuration if file exist" ; tput setaf 9;  
-tput setaf 1; echo "Rebuilding Valheim start_valheim.sh configuration file" ; tput setaf 9;
-
-[ -e ${valheimInstallPath}/start_valheim.sh ] && rm ${valheimInstallPath}/start_valheim.sh
-sleep 1
+    echo ""
+    echo -ne "
+    $(ColorOrange 'Old Public Display Name: $currentDisplayName') "
+    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    tput setaf 1; echo "New Public Display Name:" $setCurrentDisplaName ; tput setaf 9;
+    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    read -p "Do you wish to continue with these changes? (y=Yes, n=No):" confirmRestart
+    #if y, then continue, else cancel
+        if [ "$confirmRestart" == "y" ]; then
+        tput setaf 1; echo "Deleting old configuration if file exist" ; tput setaf 9;  
+        tput setaf 1; echo "Rebuilding Valheim start_valheim.sh configuration file" ; tput setaf 9;
+        [ -e ${valheimInstallPath}/start_valheim.sh ] && rm ${valheimInstallPath}/start_valheim.sh
+        sleep 1
 cat >> ${valheimInstallPath}/start_valheim.sh <<EOF
 #!/bin/bash
 export templdpath=\$LD_LIBRARY_PATH
@@ -1202,10 +1209,26 @@ export SteamAppId=892970
 ./valheim_server.x86_64 -name "${setCurrentDisplayName}" -port "${setCurrentPort)" -nographics -batchmode -world "${setCurrentWorldName}" -password "${setCurrentPassword}"
 export LD_LIBRARY_PATH=\$templdpath
 EOF
-echo "Cleaning Logs"
-rm currentConf.log
-echo "Restarting Valheim Server Service"
-sudo systemctl restart valheimserver.service
+       echo "Cleaning Logs"
+       rm currentConf.log
+       echo "Restarting Valheim Server Service"
+       sudo systemctl restart valheimserver.service
+       echo ""
+    else
+        echo "Canceled the renaming of Public Valheim Server Display Name - because Loki sucks"
+        sleep 3
+    clear
+fi
+    
+    
+    
+    
+    
+    
+    
+    
+
+
 
 
 }
