@@ -581,7 +581,7 @@ $(ColorGreen 'Press y (for yes) or n (for no)') "
         tput setaf 2; echo "Unpacking ${worldpath}/${restorefile}" ; tput setaf 9;
         tar xzf ${worldpath}/${restorefile} --strip-components=7 --directory ${worldpath}/  
 	chown -Rf steam:steam ${worldpath}
-	rm ${backups[$selectedIndex-1]} ${worldpath}/*.tgz
+	rm  ${worldpath}/*.tgz
         tput setaf 2; echo "Starting Valheim Services" ; tput setaf 9;
         tput setaf 2; echo "This better work Loki!" ; tput setaf 9;
         systemctl start valheimserver.service
