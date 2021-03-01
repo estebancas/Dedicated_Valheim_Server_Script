@@ -1139,7 +1139,7 @@ new_filename=$(echo "$a" | sed 's/.txt/.log/')
 currentPort=$(sed -n 2p $currentConfig)
 currentWorldName=$(sed -n 3p $currentConfig)
 currentPassword=$(sed -n 4p $currentConfig)
-
+clear
 echo "Current Public Server Name: ${currentDisplayName} "
 echo "Current Port Information: ${currentPort} default:2456 "
 echo "Current Local World Name: ${currentWorldName} Do not change unless you know what you are doing"
@@ -1162,7 +1162,7 @@ echo ""
     tput setaf 1; echo "The Server is required to have a public display name" ; tput setaf 9;
     tput setaf 1; echo "Do not use SPECIAL characters:" ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 2; echo "Current Public Display Name: $setCurrentDisplayName " ; tput setaf 9;
+    tput setaf 2; echo "Current Public Display Name: ${setCurrentDisplayName} " ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     echo ""
       read -p "Enter new public server display name: " setCurrentDisplayName
@@ -1170,9 +1170,9 @@ echo ""
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     echo ""
     echo -ne "
-    $(ColorOrange 'Old Public Display Name: $currentDisplayName') "
+    $(ColorOrange 'Old Public Display Name: ${currentDisplayName} ') "
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 1; echo "New Public Display Name:" $setCurrentDisplaName ; tput setaf 9;
+    tput setaf 1; echo "New Public Display Name:" ${setCurrentDisplayName} ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     read -p "Do you wish to continue with these changes? (y=Yes, n=No):" confirmPublicNameChange
     #if y, then continue, else cancel
