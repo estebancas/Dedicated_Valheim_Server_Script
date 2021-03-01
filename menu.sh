@@ -1130,13 +1130,22 @@ $(ColorPurple 'Choose an option:') "
 
 function change_public_display_name() {
 
-grep -oP '".*?"' ${valheimInstallPath}/start_valheim.sh > currentConf.log
+#grep -oP '".*?"' ${valheimInstallPath}/start_valheim.sh > currentConf.log
+#currentConfig=currentConf.log
+#currentDisplayName=$(sed -n 1p $currentConfig)
+#currentPort=$(sed -n 2p $currentConfig)
+#currentWorldName=$(sed -n 3p $currentConfig)
+#currentPassword=$(sed -n 4p $currentConfig)
 
-currentConfig=currentConf.log
-currentDisplayName=$(sed -n 1p $currentConfig)
-currentPort=$(sed -n 2p $currentConfig)
-currentWorldName=$(sed -n 3p $currentConfig)
-currentPassword=$(sed -n 4p $currentConfig)
+
+currentDisplayName=$(perl -n -e '/\-name "?([^"]+)"? \-port/ && print "$1\n"' ${valheimInstallPath}/start_valheim.sh)
+currentPort=$(perl -n -e '/\-port "?([^"]+)"? \-nographics/ && print "$1\n"' ${valheimInstallPath}/start_valheim.sh)
+currentWorldName=$(perl -n -e '/\-world "?([^"]+)"? \-password/ && print "$1\n"' ${valheimInstallPath}/start_valheim.sh)
+currentPassword=$(perl -n -e '/\-password "?([^"]+)"?$/ && print "$1\n"' ${valheimInstallPath}/start_valheim.sh)
+
+
+
+
 clear
 echo "Current Public Server Name: ${currentDisplayName} "
 echo "Current Port Information(default:2456): ${currentPort} "
