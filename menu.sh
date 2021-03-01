@@ -1247,8 +1247,6 @@ echo ""
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     tput setaf 2; echo "Current Server Port: ${setCurrentPort} " ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 5; echo "Old Server Port: " ${currentPort} ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     echo ""
     while true; do
     read -p "Enter new Server Port (Default:2456): " setCurrentPort
@@ -1258,9 +1256,12 @@ echo ""
     echo ""
     echo "Try again, Loki got you or you typed something wrong or your port range is incorrect"
   done
+    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    tput setaf 5; echo "Old Server Port: " ${currentPort} ; tput setaf 9;
+    tput setaf 1; echo "New Server Port: " ${setCurrentPort} ; tput setaf 9;
+    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     read -p "Do you wish to continue with these changes? (y=Yes, n=No):" confirmServerPortChange
     echo ""
-    #read -p "Do you wish to continue with these changes? (y=Yes, n=No):" confirmServerPortChange
     #if y, then continue, else cancel
     if [ "$confirmServerPortChange" == "y" ]; then
         tput setaf 1; echo "Deleting old configuration if file exist" ; tput setaf 9;  
