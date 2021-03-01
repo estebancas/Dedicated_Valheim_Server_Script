@@ -1137,15 +1137,10 @@ function change_public_display_name() {
 #currentWorldName=$(sed -n 3p $currentConfig)
 #currentPassword=$(sed -n 4p $currentConfig)
 
-
 currentDisplayName=$(perl -n -e '/\-name "?([^"]+)"? \-port/ && print "$1\n"' ${valheimInstallPath}/start_valheim.sh)
 currentPort=$(perl -n -e '/\-port "?([^"]+)"? \-nographics/ && print "$1\n"' ${valheimInstallPath}/start_valheim.sh)
 currentWorldName=$(perl -n -e '/\-world "?([^"]+)"? \-password/ && print "$1\n"' ${valheimInstallPath}/start_valheim.sh)
 currentPassword=$(perl -n -e '/\-password "?([^"]+)"?$/ && print "$1\n"' ${valheimInstallPath}/start_valheim.sh)
-
-
-
-
 clear
 echo "Current Public Server Name: ${currentDisplayName} "
 echo "Current Port Information(default:2456): ${currentPort} "
@@ -1200,9 +1195,6 @@ export SteamAppId=892970
 ./valheim_server.x86_64 -name "${setCurrentDisplayName}" -port ${setCurrentPort} -nographics -batchmode -world ${setCurrentWorldName} -password ${setCurrentPassword}
 export LD_LIBRARY_PATH=\$templdpath
 EOF
-       echo "Cleaning Logs"
-       rm currentConf.log
-       echo "Done"
        echo "Setting Ownership to steam user and execute permissions on " ${valheimInstallPath}/start_valheim.sh 
        chown steam:steam ${valheimInstallPath}/start_valheim.sh
        chmod +x ${valheimInstallPath}/start_valheim.sh
@@ -1238,13 +1230,18 @@ echo ""
 
 function change_server_access_password() {
 
-grep -oP '".*?"' ${valheimInstallPath}/start_valheim.sh > currentConf.log
+#grep -oP '".*?"' ${valheimInstallPath}/start_valheim.sh > currentConf.log
+#currentConfig=currentConf.log
+#currentDisplayName=$(sed -n 1p $currentConfig)
+#currentPort=$(sed -n 2p $currentConfig)
+#currentWorldName=$(sed -n 3p $currentConfig)
+#currentPassword=$(sed -n 4p $currentConfig)
 
-currentConfig=currentConf.log
-currentDisplayName=$(sed -n 1p $currentConfig)
-currentPort=$(sed -n 2p $currentConfig)
-currentWorldName=$(sed -n 3p $currentConfig)
-currentPassword=$(sed -n 4p $currentConfig)
+###start peeking into files
+currentDisplayName=$(perl -n -e '/\-name "?([^"]+)"? \-port/ && print "$1\n"' ${valheimInstallPath}/start_valheim.sh)
+currentPort=$(perl -n -e '/\-port "?([^"]+)"? \-nographics/ && print "$1\n"' ${valheimInstallPath}/start_valheim.sh)
+currentWorldName=$(perl -n -e '/\-world "?([^"]+)"? \-password/ && print "$1\n"' ${valheimInstallPath}/start_valheim.sh)
+currentPassword=$(perl -n -e '/\-password "?([^"]+)"?$/ && print "$1\n"' ${valheimInstallPath}/start_valheim.sh)
 clear
 echo "Current Public Server Name: ${currentDisplayName} "
 echo "Current Port Information(default:2456): ${currentPort} "
@@ -1307,8 +1304,6 @@ export SteamAppId=892970
 ./valheim_server.x86_64 -name ${setCurrentDisplayName} -port ${setCurrentPort} -nographics -batchmode -world ${setCurrentWorldName} -password "${setCurrentPassword}"
 export LD_LIBRARY_PATH=\$templdpath
 EOF
-       tput setaf 1; echo "Cleaning Logs" ; tput setaf 9;
-       rm currentConf.log
        tput setaf 2; echo "Done" ; tput setaf 9;
        tput setaf 1; echo "Setting Ownership to steam user and execute permissions on " ${valheimInstallPath}/start_valheim.sh ; tput setaf 9;
        chown steam:steam ${valheimInstallPath}/start_valheim.sh
