@@ -485,6 +485,12 @@ fi
 function backup_world_data() {
     echo ""
     echo ""
+    #read user input confirmation
+      echo "This will stop and start Valheim Services."
+      echo "Are you okay with this? (y=Yes, n=No)"
+         read -p "" confirmBackup
+         #if y, then continue, else cancel
+         if [ "$confirmBackup" == "y" ]; then
          ## Get the current date as variable.
          TODAY="$(date +%Y-%m-%d-%T)"
 	 echo "Checking to see if backup directory is created"
@@ -517,7 +523,9 @@ function backup_world_data() {
 	 chown -Rf steam:steam ${backupPath}
 	 echo "Process complete!"
     echo ""
-
+ else 
+    echo "Backuping up of the world files .db and .fwl canceled"
+ fi
 }
 
 ########################################################################
@@ -952,7 +960,7 @@ admin_tools_menu(){
 echo ""
 echo -ne "
 $(ColorOrange '---------------Valheim Backup and Restore Tools-------------')
-$(ColorOrange '-')$(ColorGreen ' 1)') Backup World
+$(ColorOrange '-')$(ColorGreen ' 1)') Backup World (stop/starts Valheim)
 $(ColorOrange '-')$(ColorGreen ' 2)') Restore World
 $(ColorOrange '--------------------Valheim Service Tools-------------------')
 $(ColorOrange '-')$(ColorGreen ' 3)') Stop Valheim Server
