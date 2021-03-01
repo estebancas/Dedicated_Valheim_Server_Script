@@ -1169,7 +1169,6 @@ echo ""
     echo ""
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     echo ""
-    echo -ne "
     tput setaf 5; echo "Old Public Display Name: " ${currentDisplayName} ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     echo ""
