@@ -1158,8 +1158,7 @@ echo ""
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     tput setaf 1; echo "Now for Loki, please follow instructions" ; tput setaf 9;
     tput setaf 1; echo "The Server is required to have a public display name" ; tput setaf 9;
-    tput setaf 1; echo "Do not use the follow characters:" ; tput setaf 9;
-    tput setaf 1; echo -e "BAD: ! @ # $ % ^ & * ( ) { } [ ] ~ `  " ; tput setaf 9;
+    tput setaf 1; echo "Do not use SPECIAL characters:" ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     tput setaf 2; echo "Current Public Display Name: $setCurrentDisplayName " ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
