@@ -951,7 +951,7 @@ $(ColorPurple 'Choose an option:') "
 admin_tools_menu(){
 echo ""
 echo -ne "
-$(ColorOrange '-------------Valheim Backup and Restore Tools---------------')
+$(ColorOrange '---------------Valheim Backup and Restore Tools-------------')
 $(ColorOrange '-')$(ColorGreen ' 1)') Backup World
 $(ColorOrange '-')$(ColorGreen ' 2)') Restore World
 $(ColorOrange '--------------------Valheim Service Tools-------------------')
@@ -963,7 +963,7 @@ $(ColorOrange '----------------Official Valheim Server Update--------------')
 $(ColorOrange '-')$(ColorGreen ' 7)') Check and Apply Valheim Server Update
 $(ColorOrange '------------------First Time or Reinstall-------------------')
 $(ColorOrange '-')$(ColorGreen ' 8)') Fresh Valheim Server
-$(ColorOrange '------------------------------------------------------------')
+$(ColorOrange '-------------Edit start_valehim.sh Configuration------------')
 $(ColorOrange '-')$(ColorGreen ' 9)') Edit Valheim Startup Config File
 $(ColorOrange '------------------------------------------------------------')
 $(ColorOrange '-')$(ColorGreen ' 0)') Go to Main Menu
