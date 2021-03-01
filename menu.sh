@@ -1245,11 +1245,12 @@ echo ""
     tput setaf 1; echo "Now for Loki, please follow instructions" ; tput setaf 9;
     tput setaf 1; echo "The Server is required to have a port to operate on" ; tput setaf 9;
     tput setaf 1; echo "Do not use SPECIAL characters:" ; tput setaf 9;
+    tput setaf 1; echo "New assigned port must be greater than 3000:" ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     tput setaf 2; echo "Current Server Port: ${setCurrentPort} " ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     echo ""
-      read -p "Enter new public server display name: " setCurrentPort
+      read -p "Enter new Server Port (Default:2456): " setCurrentPort
     echo ""
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     echo ""
