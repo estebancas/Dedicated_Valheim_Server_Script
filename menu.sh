@@ -1258,7 +1258,7 @@ echo ""
   done
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     tput setaf 5; echo "Old Server Port: " ${currentPort} ; tput setaf 9;
-    tput setaf 1; echo "New Server Port: " ${setCurrentPort} ; tput setaf 9;
+    tput setaf 6; echo "New Server Port: " ${setCurrentPort} ; tput setaf 9;
     tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
     read -p "Do you wish to continue with these changes? (y=Yes, n=No):" confirmServerPortChange
     echo ""
