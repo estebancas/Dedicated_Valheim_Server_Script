@@ -1141,7 +1141,7 @@ currentWorldName=$(sed -n 3p $currentConfig)
 currentPassword=$(sed -n 4p $currentConfig)
 clear
 echo "Current Public Server Name: ${currentDisplayName} "
-echo "Current Port Information: ${currentPort} default:2456 "
+echo "Current Port Information(default:2456): ${currentPort} "
 echo "Current Local World Name: ${currentWorldName} Do not change unless you know what you are doing"
 echo "Current Server Access Password: ${currentPassword} "
 
